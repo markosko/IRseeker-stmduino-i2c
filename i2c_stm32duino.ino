@@ -40,37 +40,37 @@ char printHex(int numberToPrint)
 
 
 uint32_t masks[] = {
-		  0, // 0
-		  1, // 1
-		  2, // 2
-		  3, // 3
-		  4, // 4
-		  5, // 5
-		  6, // 6
-		  7, // 7
-		  9, // 8
-		  10,// 9
-		  11,//10
-		  12,//11
+    0, // 0
+    1, // 1
+    2, // 2
+    3, // 3
+    4, // 4
+    5, // 5
+    6, // 6
+    7, // 7
+    9, // 8
+    10,// 9
+    11,//10
+    12,//11
 };
 void reset_inputs(){
-	for(int i=0;i<12;i++){
-		inputs[i] = 0;
-	}
+    for(int i=0;i<12;i++){
+        inputs[i] = 0;
+    }
 }
 void read_inputs(){
 
-	milis = 0;
+    milis = 0;
 
 
-	while(milis <2){
-		uint32_t value =  (GPIOB->IDR & 0b0001111011111111);
+    while(milis <2){
+        uint32_t value =  (GPIOB->IDR & 0b0001111011111111);
     
-		for(int i=0;i<12;i++){
+        for(int i=0;i<12;i++){
       
-			inputs[i] += 1 - ((value & (1 << masks[i])) >> masks[i]);
-		}
-	}
+            inputs[i] += 1 - ((value & (1 << masks[i])) >> masks[i]);
+        }
+    }
 
 }
 
@@ -78,18 +78,18 @@ unsigned int find_max(){
 
 
   unsigned int current_max = 0;
-	unsigned int c = 0;
-	
-	for(int i=0;i<12;i++){
+    unsigned int c = 0;
+    
+    for(int i=0;i<12;i++){
 
-		if(inputs[i] > current_max){
-			c = i+1;
-			current_max = inputs[i];
+        if(inputs[i] > current_max){
+            c = i+1;
+            current_max = inputs[i];
 
-		}
-	}
+        }
+    }
 
-	return c;
+    return c;
 }
 
 
